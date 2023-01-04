@@ -1,0 +1,9 @@
+### testing for user controller
+
+POST http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+    "email":"ali@gmail.com",
+    "password":"2580123"
+}
