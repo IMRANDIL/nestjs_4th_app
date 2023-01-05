@@ -10,8 +10,8 @@ export class UsersController {
     return this.userService.createUser(body.email, body.password);
   }
 
-  @Get()
-  getAllUser() {
-    return this.userService.getAllUser();
-  }
+  // @Get()
+  // getAllUser() {
+  //   return this.userService.getAllUser();
+  // }
 }
