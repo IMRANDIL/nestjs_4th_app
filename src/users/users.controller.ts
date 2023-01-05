@@ -25,17 +25,17 @@ export class UsersController {
   }
 
   @Get('/:id')
-  getSpecificUser(@Param() Param: any) {
-    return this.userService.getSpecificUser(parseInt(Param.id));
+  getSpecificUser(@Param('id') id: string) {
+    return this.userService.getSpecificUser(parseInt(id));
   }
 
   @Put('/:id')
-  update(@Param() param: any, @Body() body: UpdateUserDTO) {
-    return this.userService.update(parseInt(param.id), body);
+  update(@Param('id') id: string, @Body() body: UpdateUserDTO) {
+    return this.userService.update(parseInt(id), body);
   }
 
   @Delete('/:id')
-  delete(@Param() param: any) {
-    return this.userService.remove(parseInt(param.id));
+  delete(@Param('id') id: string) {
+    return this.userService.remove(parseInt(id));
   }
 }
