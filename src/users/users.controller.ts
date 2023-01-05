@@ -29,12 +29,12 @@ export class UsersController {
   }
 
   @Put('/:id')
-  update(@Param() id: string, @Body() body: any) {
-    return this.userService.update(parseInt(id), body);
+  update(@Param() param: any, @Body() body: any) {
+    return this.userService.update(parseInt(param.id), body);
   }
 
   @Delete('/:id')
-  delete(@Param() id: string) {
-    return this.userService.remove(parseInt(id));
+  delete(@Param() param: any) {
+    return this.userService.remove(parseInt(param.id));
   }
 }
