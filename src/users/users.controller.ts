@@ -13,19 +13,19 @@ import { UsersService } from './users.service';
 @Controller('auth')
 export class UsersController {
   constructor(private userService: UsersService) {}
-  @Post('/signup')
-  createUser(@Body() body: createUserDTO) {
-    return this.userService.createUser(body.email, body.password);
-  }
-
   @Get('/allUser')
   getAllUser() {
     return this.userService.getAllUser();
   }
 
+  @Post('/signup')
+  createUser(@Body() body: createUserDTO) {
+    return this.userService.createUser(body.email, body.password);
+  }
+
   @Get('/:id')
-  findOne(@Param() id: string) {
-    return this.userService.findOne(parseInt(id));
+  getSpecificUser(@Param() Param: any) {
+    return this.userService.getSpecificUser(parseInt(Param.id));
   }
 
   @Put('/:id')
