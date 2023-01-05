@@ -8,7 +8,7 @@ Content-Type: application/json
     "password":"2580123"
 };
 
-
+### Find a particular user
 
 GET http://localhost:3000/auth/allUser
 

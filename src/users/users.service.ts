@@ -7,7 +7,6 @@ import {
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
-import { createUserDTO } from './dtos/create-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -35,8 +34,13 @@ export class UsersService {
     return this.repo.findOneBy({ id });
   }
 
-  find() {
-    return this.repo.find({});
+  async getAllUser() {
+    try {
+      const users = await this.repo.find();
+      return users;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async update(id: number, attrs: Partial<User>) {

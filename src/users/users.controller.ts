@@ -18,14 +18,14 @@ export class UsersController {
     return this.userService.createUser(body.email, body.password);
   }
 
+  @Get('/allUser')
+  getAllUser() {
+    return this.userService.getAllUser();
+  }
+
   @Get('/:id')
   findOne(@Param() id: string) {
     return this.userService.findOne(parseInt(id));
-  }
-
-  @Get('/allUser')
-  find() {
-    return this.userService.find();
   }
 
   @Put('/:id')
