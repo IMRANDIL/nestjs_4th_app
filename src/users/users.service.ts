@@ -26,9 +26,13 @@ export class UsersService {
     return this.repo.save(createNewUser);
   }
 
-  findOne() {}
+  findOne(id: number) {
+    return this.repo.findOneBy({ id });
+  }
 
-  find() {}
+  find() {
+    return this.repo.find({});
+  }
 
   update() {}
 
