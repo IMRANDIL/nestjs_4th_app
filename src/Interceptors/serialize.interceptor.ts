@@ -16,6 +16,7 @@ export class SerializeInterceptor implements NestInterceptor {
     return next.handle().pipe(
       map((data: any) => {
         //Run something before the response is sent out
+        console.log('I am running before the response is sent out', data);
       }),
     );
   }
