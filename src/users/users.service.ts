@@ -34,7 +34,9 @@ export class UsersService {
     return this.repo.find({});
   }
 
-  update() {}
+  async update(id: number, attrs: Partial<User>) {
+    const user = await this.findOne(id);
+  }
 
   remove() {}
 }
