@@ -30,6 +30,11 @@ export class UsersService {
     return this.repo.save(createNewUser);
   }
 
+  async findUser(email: string) {
+    const user = await this.repo.findOneBy({ email });
+    return user;
+  }
+
   async getSpecificUser(id: number) {
     try {
       const user = await this.repo.findOneBy({ id });
