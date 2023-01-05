@@ -14,11 +14,15 @@ import { UsersService } from './users.service';
 import { UpdateUserDTO } from './dtos/update-user.dto';
 import { Serialize } from 'src/Interceptors/serialize.interceptor';
 import { UserDTO } from './dtos/user.dto';
+import { AuthService } from './auth.service';
 
 @Serialize(UserDTO)
 @Controller('auth')
 export class UsersController {
-  constructor(private userService: UsersService) {}
+  constructor(
+    private userService: UsersService,
+    private authService: AuthService,
+  ) {}
 
   @Get('/allUser')
   getAllUser() {
