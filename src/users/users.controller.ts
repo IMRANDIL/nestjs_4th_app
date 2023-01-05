@@ -6,6 +6,7 @@ import {
   Get,
   Put,
   Delete,
+  NotFoundException,
 } from '@nestjs/common';
 import { createUserDTO } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
@@ -25,8 +26,12 @@ export class UsersController {
   }
 
   @Get('/:id')
-  getSpecificUser(@Param('id') id: string) {
-    return this.userService.getSpecificUser(parseInt(id));
+  async getSpecificUser(@Param('id') id: string) {
+    const specificUser = await this.userService.getSpecificUser(parseInt(id));
+    if (!specificUser) {
+      throw new NotFoundException('User not found');
+    }
+    return specificUser;
   }
 
   @Put('/:id')

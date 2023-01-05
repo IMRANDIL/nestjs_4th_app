@@ -33,10 +33,6 @@ export class UsersService {
   async getSpecificUser(id: number) {
     try {
       const user = await this.repo.findOneBy({ id });
-
-      if (user === null) {
-        throw new NotFoundException('User not found');
-      }
       return user;
     } catch (error) {
       console.log(error);

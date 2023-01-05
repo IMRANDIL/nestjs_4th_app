@@ -15,11 +15,11 @@ GET http://localhost:3000/auth/allUser
 
 ### Find a specific user
 
-GET http://localhost:3000/auth/2
+GET http://localhost:3000/auth/1
 
 ### update a specific user
 
-PUT http://localhost:3000/auth/1
+PUT http://localhost:3000/auth/3
 Content-Type: application/json
 
 {
