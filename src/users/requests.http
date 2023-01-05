@@ -6,4 +6,10 @@ Content-Type: application/json
 {
     "email":"imran@gmail.com",
     "password":"2580123"
-}
+};
+
+
+
+GET http://localhost:3000/auth/allUser
+
+
