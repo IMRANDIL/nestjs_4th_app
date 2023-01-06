@@ -8,6 +8,21 @@ Content-Type: application/json
     "password":"2580123"
 }
 
+
+
+
+### Testing the SignIn
+
+POST  http://localhost:3000/auth/signIn
+Content-Type: application/json
+
+{
+    "email":"adil@gmail.com",
+    "password":"2580123"
+}
+
+
+
 ### Find all user
 
 GET http://localhost:3000/auth/allUser

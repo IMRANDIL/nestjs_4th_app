@@ -37,7 +37,7 @@ export class AuthService {
   async signIn(email: string, password: string) {
     const user = await this.usersService.findUser(email);
 
-    if (!email) {
+    if (!user) {
       throw new NotFoundException('User not found');
     }
 
