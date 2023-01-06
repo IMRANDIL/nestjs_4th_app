@@ -41,7 +41,7 @@ export class UsersController {
   // }
 
   @Get('/Whoami')
-  async whoAmI(@currentUser() user: string) {
+  async whoAmI(@currentUser() user: User) {
     return user;
   }
 
