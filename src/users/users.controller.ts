@@ -30,8 +30,18 @@ export class UsersController {
   }
 
   @Get('/Whoami')
-  whoAmI(@Session() session: any) {
-    return this.userService.getSpecificUser(session.userId);
+  async whoAmI(@Session() session: any) {
+    const user = await this.userService.getSpecificUser(session.userId);
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return user;
+  }
+
+  @Post('/signout')
+  signOut(@Session() session: any) {
+    session.userId = null;
+    return 'user signed out';
   }
 
   @Post('/signup')

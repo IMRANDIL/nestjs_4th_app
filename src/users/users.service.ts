@@ -23,6 +23,9 @@ export class UsersService {
   }
 
   async getSpecificUser(id: number) {
+    if (!id) {
+      return null;
+    }
     try {
       const user = await this.repo.findOneBy({ id });
       return user;
