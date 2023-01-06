@@ -40,5 +40,14 @@ export class AuthService {
     if (!email) {
       throw new NotFoundException('User not found');
     }
+
+    const [storedHash, salt] = user.password.split('.');
+    const hash = (await scrypt(password, salt, 32)) as Buffer;
+
+    if (storedHash !== hash.toString('hex')) {
+      throw new BadRequestException('Invalid Credentials');
+    }
+
+    return user;
   }
 }
