@@ -15,6 +15,8 @@ import { UpdateUserDTO } from './dtos/update-user.dto';
 import { Serialize } from 'src/Interceptors/serialize.interceptor';
 import { UserDTO } from './dtos/user.dto';
 import { AuthService } from './auth.service';
+import { currentUser } from './decorators/current-user.decorator';
+import { User } from './user.entity';
 
 @Serialize(UserDTO)
 @Controller('auth')
@@ -29,12 +31,17 @@ export class UsersController {
     return this.userService.getAllUser();
   }
 
+  // @Get('/Whoami')
+  // async whoAmI(@Session() session: any) {
+  //   const user = await this.userService.getSpecificUser(session.userId);
+  //   if (!user) {
+  //     throw new NotFoundException('User not found');
+  //   }
+  //   return user;
+  // }
+
   @Get('/Whoami')
-  async whoAmI(@Session() session: any) {
-    const user = await this.userService.getSpecificUser(session.userId);
-    if (!user) {
-      throw new NotFoundException('User not found');
-    }
+  async whoAmI(@currentUser() user: string) {
     return user;
   }
 
