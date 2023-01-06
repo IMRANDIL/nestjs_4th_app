@@ -8,6 +8,7 @@ import {
   Delete,
   NotFoundException,
   Session,
+  UseGuards,
 } from '@nestjs/common';
 import { createUserDTO } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
@@ -17,6 +18,7 @@ import { UserDTO } from './dtos/user.dto';
 import { AuthService } from './auth.service';
 import { currentUser } from './decorators/current-user.decorator';
 import { User } from './user.entity';
+import { AuthGuard } from './guards/auth.guard';
 
 @Serialize(UserDTO)
 @Controller('auth')
@@ -41,6 +43,7 @@ export class UsersController {
   // }
 
   @Get('/Whoami')
+  @UseGuards(AuthGuard)
   async whoAmI(@currentUser() user: User) {
     if (user === null || user === undefined) {
       throw new NotFoundException('User not found');
