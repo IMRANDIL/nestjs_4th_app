@@ -29,16 +29,23 @@ export class UsersController {
     return this.userService.getAllUser();
   }
 
+  @Get('/Whoami')
+  whoAmI(@Session() session: any) {
+    return this.userService.getSpecificUser(session.userId);
+  }
+
   @Post('/signup')
   async createUser(@Body() body: createUserDTO, @Session() session: any) {
     const user = await this.authService.signup(body.email, body.password);
     session.userId = user.id;
+    return user;
   }
 
   @Post('/signIn')
   async signInUser(@Body() body: createUserDTO, @Session() session: any) {
     const user = await this.authService.signIn(body.email, body.password);
     session.userId = user.id;
+    return user;
   }
 
   @Get('/:id')

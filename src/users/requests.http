@@ -1,10 +1,19 @@
+
+### testing whoami
+
+GET http://localhost:3000/auth/Whoami
+
+
+
+
+
 ### testing for user controller
 
 POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-    "email":"adil@gmail.com",
+    "email":"love@gmail.com",
     "password":"2580123"
 }
 
