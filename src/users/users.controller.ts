@@ -30,13 +30,15 @@ export class UsersController {
   }
 
   @Post('/signup')
-  createUser(@Body() body: createUserDTO) {
-    return this.authService.signup(body.email, body.password);
+  async createUser(@Body() body: createUserDTO, @Session() session: any) {
+    const user = await this.authService.signup(body.email, body.password);
+    session.userId = user.id;
   }
 
   @Post('/signIn')
-  signInUser(@Body() body: createUserDTO) {
-    return this.authService.signIn(body.email, body.password);
+  async signInUser(@Body() body: createUserDTO, @Session() session: any) {
+    const user = await this.authService.signIn(body.email, body.password);
+    session.userId = user.id;
   }
 
   @Get('/:id')
