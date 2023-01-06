@@ -45,6 +45,9 @@ export class UsersController {
 
   @Get('/Whoami')
   async whoAmI(@currentUser() user: User) {
+    if (user === null || user === undefined) {
+      throw new NotFoundException('User not found');
+    }
     return user;
   }
 
