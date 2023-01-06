@@ -7,7 +7,7 @@ import {
   Put,
   Delete,
   NotFoundException,
-  UseInterceptors,
+  Session,
 } from '@nestjs/common';
 import { createUserDTO } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
