@@ -11,7 +11,7 @@ describe('AuthService in Action', () => {
   beforeEach(async () => {
     //create a fake copy of users service
 
-    fakeUsersService: fakeUsersService = {
+    fakeUsersService = {
       findUser: (email: string) =>
         Promise.resolve({ id: 1, email, password: '2580123' } as User),
       createUser: (email: string, password: string) =>
