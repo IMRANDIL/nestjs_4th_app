@@ -6,11 +6,12 @@ import { BadRequestException } from '@nestjs/common';
 
 describe('AuthService in Action', () => {
   let service: AuthService;
+  let fakeUsersService: Partial<UsersService>;
 
   beforeEach(async () => {
     //create a fake copy of users service
 
-    const fakeUsersService: Partial<UsersService> = {
+    fakeUsersService: fakeUsersService = {
       findUser: (email: string) =>
         Promise.resolve({ id: 1, email, password: '2580123' } as User),
       createUser: (email: string, password: string) =>
@@ -38,6 +39,7 @@ describe('AuthService in Action', () => {
   });
 
   it('creates a new user with a salted and hashed password', async () => {
+    fakeUsersService.findUser = () => Promise.resolve(null);
     const user = await service.signup('raju@gmail.com', '2580123');
     expect(user.password).not.toEqual('2580123');
     const [hash, salt] = user.password.split('.');
