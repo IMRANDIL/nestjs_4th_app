@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 import { AuthService } from './auth.service';
 import { User } from './user.entity';
 import { UsersService } from './users.service';
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 
 describe('AuthService in Action', () => {
   let service: AuthService;
@@ -39,11 +39,29 @@ describe('AuthService in Action', () => {
   });
 
   it('creates a new user with a salted and hashed password', async () => {
-    fakeUsersService.findUser = () => Promise.resolve(null);
+    fakeUsersService.findUser = (email: string) => Promise.resolve(null);
     const user = await service.signup('raju@gmail.com', '2580123');
     expect(user.password).not.toEqual('2580123');
     const [hash, salt] = user.password.split('.');
     expect(salt).toBeDefined();
     expect(hash).toBeDefined();
+  });
+
+  it('login check if user does not exist', async () => {
+    fakeUsersService.findUser = (email: string) => Promise.resolve(null);
+    await expect(service.signIn('love@gmail.com', '2580123')).rejects.toThrow(
+      NotFoundException,
+    );
+  });
+
+  it('login flow password check', async () => {
+    fakeUsersService.findUser = () =>
+      Promise.resolve({
+        email: 'ali@gmail.com',
+        password: '258llllllllllllll.0123',
+      } as User);
+    await expect(service.signIn('ali@gmail.com', 'password')).rejects.toThrow(
+      BadRequestException,
+    );
   });
 });
